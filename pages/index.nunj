@@ -1,0 +1,184 @@
+{% extends "../templates/base.nunj" %}
+
+{% from "../components/button/button.nunj" import button %}
+{% from "../components/icon/icon.nunj" import icon %}
+
+{# Пример расширения существующего блока #}
+{# Например можно использовать для добавления уникальных тайтлов для каждой страницы #}
+{# {% block title %}Home / {{ super() }}{% endblock title %} #}
+
+{% block content %}
+
+		{% include '../includes/header/header.nunj' %}
+
+		<div class="main">
+				<div class="main__content">
+						<div class="legend">
+								<div class="legend__box">
+										<div class="legend__item">1</div>
+										<span class="legend__label">Account</span>
+								</div>
+								<div class="legend__box">
+										<div class="legend__item">2</div>
+										<span class="legend__label">Shipping</span>
+								</div>
+								<div class="legend__box">
+										<div class="legend__item legend__item--active">3</div>
+										<span class="legend__label">Billing</span>
+								</div>
+								<div class="legend__box">
+										<div class="legend__item legend__item--inactive">4</div>
+										<span class="legend__label">Review</span>
+								</div>
+						</div>
+						<div class="billing">
+								<div class="billing__box">
+										<div class="billing__title">Billing Information</div>
+										<form action="" class="billing__form">
+												<div class="billing__cards">
+														<div class="cards">
+																<div class="cards__item">
+																		<input class="cards__radio" name="card" type="radio" id="card-credit" checked="checked">
+																		<label for="card-credit">Pay with Credit Card</label>
+																</div>
+																<div class="cards__item">
+																		<input class="cards__radio" name="card" type="radio" id="card-paypal">
+																		<label for="card-paypal">
+																				{{ icon({
+														iconName: 'paypal',
+														className: 'cards__icon--paypal'
+														}) }}
+																		</label>
+																</div>
+														</div>
+												</div>
+												<div class="billing__card-info">
+														<div class="card-info">
+																<div class="card-info field">
+																		<label class="field__label" for="card-name">Name on card</label>
+																		<input class="field__input" type="text" id="card-name" maxlength="20" placeholder="Placeholder text">
+																</div>
+																<div class="card-info field">
+																		<label class="field__label" for="card-number">Card number</label>
+																		<div class="card-info__row">
+																				<input class="field__input field__short" type="text" id="card-number" maxlength="4" inputmode="numeric">
+																				<input class="field__input field__short" type="text" id="card-number" maxlength="4" inputmode="numeric">
+																				<input class="field__input field__short" type="text" id="card-number" maxlength="4" inputmode="numeric">
+																				<input class="field__input field__short" type="text" id="card-number" maxlength="4" inputmode="numeric">
+																		</div>
+																</div>
+																<div class="card-info__row">
+																		<div class="card-info field field__short">
+																				<label class="field__label" for="card-date">Expire date</label>
+																				<input class="field__input" type="text" id="card-date">
+																		</div>
+																		<div class="card-info field field__short">
+																				<div class="tooltip">
+																						<label class="field__label" for="card-code">CVV code</label>
+																						<div class="tooltip__item">?
+																								<span class="tooltip__text">
+																										<b>CVV code</b>
+																										is a series of numbers that, in addition to the bank card number, is printed (not embossed) on a card.</span>
+																						</div>
+																				</div>
+																				<input class="field__input" type="text" id="card-code" maxlength="3">
+																		</div>
+																</div>
+														</div>
+												</div>
+												<div class="billing__bottom billing-interaction">
+														<div class="billing-interaction__info">
+																<div class="billing-interaction__checkbox">
+																		<input type="checkbox" name="save-card" id="save-credit-card" checked="checked">
+																		<label for="save-credit-card">Save information of this credit card</label>
+																</div>
+																<div class="billing-interaction__checkbox">
+																		<input type="checkbox" name="privacy" id="privacy-policies">
+																		<label for="privacy-policies">I accept the
+																				<a href="#">terms and comditions</a>
+																				and the
+																				<a href="#">Privacy Policies</a>
+																		</label>
+																</div>
+														</div>
+														<div class="billing-interaction__buttons">
+																{{ button({
+						className: '',
+						children: 'Back',
+						chevronRight: false
+					}) }}
+																{{ button({
+						className: 'btn__submit',
+						children: 'Check Out',
+						chevronRight: false
+					}) }}
+														</div>
+												</div>
+										</form>
+								</div>
+						</div>
+				</div>
+		</div>
+
+		<div class="sidebar">
+				<div class="sidebar-section">
+						<div class="sidebar-section__box">
+								<div class="sidebar-section__title">My basket</div>
+								{% include '../includes/basket/basket.nunj' %}
+						</div>
+				</div>
+				<div class="sidebar-section">
+						<div class="sidebar-section__box">
+								<div class="sidebar-section__title">Promo code</div>
+								<div class="promo">
+										<input class="field__input" type="text" placeholder="Placeholder text">
+										{{ button({
+						className: 'btn__submit',
+						children: 'Apply',
+						chevronRight: false
+					}) }}
+								</div>
+						</div>
+				</div>
+				<div class="sidebar-section__box">
+						<div class="total-price">
+								<div class="total-price__item">
+										<div class="total-price__text">Subtotal</div>
+										<div class="total-price__text" data-total-price="subtotal">$ 0</div>
+								</div>
+								{% for item in priceData %}
+										<div class="total-price__item">
+												<div class="total-price__text">{{ item.title }}</div>
+												<div class="total-price__text" data-total-{{ item.title }}="data-total-{{ item.title }}">$
+														{{ item.price }}</div>
+										</div>
+								{% endfor %}
+								<div class="total-price__item">
+										<div class="total-price__text total-price__text--bold">Total</div>
+										<div class="total-price__text total-price__text--bold" data-total-price="total">$ 0</div>
+								</div>
+						</div>
+				</div>
+		</div>
+
+		{# {% for i in range(1, 13) %}
+										<span>{{ i }}</span>
+								{% endfor %} #}
+
+		{# Пример с функциями
+				<p style="margin-bottom: 20px;">{{ addAwesome('Это текст для теста функций') }}</p>
+
+				{% if DEVELOP %}
+						<div class="debug" style="margin-bottom: 20px;">
+								<h2 style="margin-bottom: 15px;">Debug:</h2>
+								<p>Эта информация будет выводиться только при DEVELOP = true.</p>
+						</div>
+				{% endif %} #}
+		{#
+						{{ icon({
+				iconName: 'chat',
+				className: 'icon',
+				attributes: 'viewBox="0 0 20 20" style="width: 40px; height: 40px; fill: #212121;"'
+			}) }} #}
+
+{% endblock %}
