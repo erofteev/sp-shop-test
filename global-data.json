@@ -1,0 +1,38 @@
+{
+	"menuItems": [
+		{
+			"name": "Women's",
+			"path": "#"
+		},
+		{
+			"name": "Men's",
+			"path": "#"
+		},
+		{
+			"name": "Home",
+			"path": "#"
+		},
+		{
+			"name": "Travel",
+			"path": "#"
+		},
+		{
+			"name": "Beauty",
+			"path": "#"
+		},
+		{
+			"name": "Sale",
+			"path": "#"
+		}
+	],
+	"priceData": [
+		{
+			"title": "Tax",
+			"price": "100"
+		},
+		{
+			"title": "Shipping",
+			"price": "150"
+		}
+	]
+}

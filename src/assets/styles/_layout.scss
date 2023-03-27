@@ -1,0 +1,37 @@
+// .wrapper {
+// 	position: relative;
+// }
+
+// .container {
+// 	max-width: 980px;
+// 	margin: auto;
+// 	box-sizing: content-box;
+// }
+
+//--begin::Page
+.page {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr minmax(120px, 410px);
+	grid-template-rows: 80px 1fr;
+	grid-template-areas:
+		'header header'
+		'main sidebar';
+	width: 100%;
+	overflow: hidden;
+}
+
+//--end::Page
+
+//--begin::Media queries
+@media (max-width: 768px) {
+	.page {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			'header'
+			'main'
+			'sidebar';
+	}
+}
+
+//--end::Media queries
