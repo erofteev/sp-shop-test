@@ -19,7 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm ci
+          npm install
       - name: Run checks and deploy
         run: |
           npm run build
