@@ -1,7 +1,0 @@
-{% macro menu(active=false) %}
-	<nav class="nav">
-		{% for item in menuItems %}
-			<li class="nav__item"><a href="{{ item.path }}" class="nav__link{% if item.id == activeItem %} _active{% endif %}">{{ item.name }}</a></li>
-		{% endfor %}
-	</nav>
-{% endmacro %}
